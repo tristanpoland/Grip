@@ -16,7 +16,7 @@ Grip is a fast, user-friendly package manager that installs packages directly fr
 
 ### From Source
 ```bash
-git clone https://github.com/yourusername/grip
+git clone https://github.com/Grip-Packages/Grip
 cd grip
 cargo install --path .
 ```
