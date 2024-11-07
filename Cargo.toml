@@ -1,0 +1,29 @@
+[package]
+name = "grip"
+version = "0.1.0"
+edition = "2021"
+authors = ["Tristen Poland"]
+description = "Grip - GitHub Release Installer & Package Manager"
+
+[dependencies]
+clap = { version = "4.4", features = ["derive"] }
+tokio = { version = "1.0", features = ["full"] }
+reqwest = { version = "0.11", features = ["json", "stream"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+colored = "2.0"
+dialoguer = "0.11"
+indicatif = "0.17"
+dirs = "5.0"
+futures-util = "0.3"
+tempfile = "3.8"
+zip = "0.6"
+tokio-util = "0.7"
+anyhow = "1.0"
+config = "0.13"
+bytes = "1.8.0"
+thiserror = "1.0"
+
+[target.'cfg(windows)'.dependencies] 
+winreg = "0.50"
+winapi = { version = "0.3", features = ["winuser", "minwindef"] }
