@@ -75,17 +75,17 @@ pub async fn add_to_path(path: &Path) -> Result<()> {
         format!("{}/.profile", home)
     };
 
-    let export_line = format!("\nexport PATH=\"{}:$PATH\"", path.to_string_lossy());
+    let export_line = format!("export PATH=\"{}:$PATH\"", path.to_string_lossy());
     
     let rc_content = std::fs::read_to_string(&shell_rc)
         .unwrap_or_else(|_| String::new());
     
-    if !rc_content.contains(&export_line) {
-        std::fs::OpenOptions::new()
+    if !rc_content.lines().any(|line| line.trim() == export_line) {
+        let mut file = std::fs::OpenOptions::new()
             .append(true)
             .create(true)
-            .open(&shell_rc)?
-            .write_all(export_line.as_bytes())?;
+            .open(&shell_rc)?;
+        writeln!(file, "\n{}", export_line)?;
 
         println!("{} Added to PATH in {}", "✓".green(), shell_rc);
         println!("{} Run 'source {}' or restart your terminal for changes to take effect", "!".yellow(), shell_rc);
